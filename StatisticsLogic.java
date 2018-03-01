@@ -1,8 +1,4 @@
-import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
+import java.util.*;
 import java.lang.Math;
 
 public class StatisticsLogic{
@@ -73,29 +69,41 @@ public class StatisticsLogic{
 	 * @param list of type ArrayList<Double>
 	 * @return a String of the values of median, Q1 and Q3
 	 */
-	/*public String calculateMedian(ArrayList<Double> list) {
+	public String calculateMedian(ArrayList<Double> list) {
 		list.sort(Comparator.naturalOrder());
+		System.out.println(list);
 		double mid=0;
 		double q1=0;
 		double q3=0;
 		int lq = list.size() * 1/4;
 		int uq = list.size() * 3/4;
+		// even size lists
 		if (list.size() % 2 == 0) {
 			mid = ((list.get(list.size()/2-1) + list.get((list.size()/2)) )/2);
+			// if half of the list is odd
 			if ((list.size()/2) %2 == 1) {
 				q1 = list.get(lq);
 				q3 = list.get(uq);
+				// if half of the list is even	
 			} else if ((list.size()/2) % 2 == 0 ) {
 				q1 = ((list.get((lq)) + list.get((lq)-1) ) /2 );
 				q3 = ((list.get((uq)) + list.get((uq)-1) ) /2 );
 			}
+			// odd size lists	
 		} else if (list.size() % 2 == 1) {
 			mid = list.get(list.size()/2);
-			q1 = (list.get(lq-1) + (list.get(lq-2)) / 2);
-			q3 = (list.get(uq-2) + (list.get(uq-2)) / 2);
+			// if half of the list is odd
+			if ((list.size()-1)/2 %2 == 1) {
+				q1 = list.get(lq); 
+				q3 = list.get(uq); 
+			// if half of the list is even
+			} else if ((list.size()-1)/2 %2 == 0) {
+				q1 = ((list.get(lq) + (list.get(lq-1))) / 2);
+				q3 = ((list.get(uq) + (list.get(uq+1))) / 2);
+			}
 		}
 		return ("The median is: " + mid + "\nThe Q1 is: " + q1 + "\nThe Q3 is: " + q3);
-	}*/
+	}
 
 	/** Method used for calculating the maximum and minimum values of the list given
 	 * @param list of type ArrayList<Double>
@@ -107,7 +115,7 @@ public class StatisticsLogic{
 		double max = list.get(list.size()-1);
 		return ("The minimum is: " + min + " and the maximum is: " + max + "\nThe size of the list is: " + list.size());
 	}
-	
+
 	public String calculateStandDev(ArrayList<Double> list) {
 		double sumOne = 0.0;
 		double sumTwo = 0.0;
@@ -115,18 +123,18 @@ public class StatisticsLogic{
 		for (int i=0; i < list1.size(); i++) 
 		{
 			sumOne += list.get(i);
-			System.out.println(list.get(i));
+			//			System.out.println(list.get(i));
 		}
 		sumOne = (sumOne/list.size());
 		for (int i=0; i < list.size(); i++) 
 		{
 			sumTwo += Math.pow(list.get(i) - sumOne, 2);
-			System.out.println(list.get(i));
+			//			System.out.println(list.get(i));
 		}
 		stdev = Math.sqrt(sumTwo/list.size());
 		return ("The standard deviation is: " + stdev);
 	}
-	
-	
+
+
 
 }
